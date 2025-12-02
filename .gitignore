@@ -1,0 +1,42 @@
+# .gitignore for Lock-Free Concurrency Container Package
+
+# Build directories
+build/
+out/
+cmake-build-*/
+
+# IDE
+.vs/
+.vscode/settings.json
+.idea/
+*.user
+*.suo
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# CMake generated
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Testing
+Testing/
+CTestTestfile.cmake
+
+# Package managers
+_deps/
+vcpkg_installed/
+
+# OS
+.DS_Store
+Thumbs.db
