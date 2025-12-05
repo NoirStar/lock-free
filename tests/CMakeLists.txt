@@ -7,24 +7,25 @@ FetchContent_Declare(
     GIT_TAG v1.14.0
 )
 
-# Windows에서 gtest_force_shared_crt 설정
+# Windows에서 정적 런타임 사용 + GMock 비활성화
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
+set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
-
-include(GoogleTest)
 
 # 테스트 실행 파일 생성 함수
 function(add_lockfree_test TEST_NAME)
     add_executable(${TEST_NAME} ${TEST_NAME}.cpp)
     target_link_libraries(${TEST_NAME} PRIVATE
         lockfree
-        GTest::gtest_main
+        gtest
+        gtest_main
     )
-    gtest_discover_tests(${TEST_NAME})
+    add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
 endfunction()
 
-# 테스트 파일들 (구현 시 주석 해제)
-# add_lockfree_test(test_spsc_queue)
+# 테스트 파일들
+add_lockfree_test(test_spsc_queue)
 # add_lockfree_test(test_mpsc_queue)
 # add_lockfree_test(test_mpmc_queue)
 # add_lockfree_test(test_aba_detection)

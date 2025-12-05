@@ -32,6 +32,13 @@ if(LOCKFREE_BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
+# 예제 빌드 옵션
+option(LOCKFREE_BUILD_EXAMPLES "Build examples" ON)
+
+if(LOCKFREE_BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
+
 # 설치 설정
 include(GNUInstallDirs)
 install(TARGETS lockfree
