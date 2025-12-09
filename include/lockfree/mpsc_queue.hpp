@@ -120,8 +120,10 @@ public:
                tail_.load(std::memory_order_acquire);
     }
     
+    // Slot sequence technique allows using all Capacity slots
+    // (unlike one-slot-empty strategy in SPSC)
     [[nodiscard]] static constexpr size_t capacity() noexcept {
-        return Capacity - 1;
+        return Capacity;
     }
 
 private:
