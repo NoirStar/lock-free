@@ -15,5 +15,5 @@ endfunction()
 # 테스트 파일들
 add_lockfree_test(test_spsc_queue)
 add_lockfree_test(test_mpsc_queue)
-# add_lockfree_test(test_mpmc_queue)
+add_lockfree_test(test_mpmc_queue)
 # add_lockfree_test(test_aba_detection)
