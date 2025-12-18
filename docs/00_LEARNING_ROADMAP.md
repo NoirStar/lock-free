@@ -13,9 +13,10 @@
 | 2 | SPSC Queue | 가장 단순한 lock-free queue 구현 | 3-5일 |
 | 3 | MPSC Queue | 다중 생산자 단일 소비자 구현 | 3-5일 |
 | 4 | MPMC Queue | 완전한 다중 생산자/소비자 구현 | 5-7일 |
-| 5 | ABA 문제 | ABA 문제 이해 및 검출 테스트 | 2-3일 |
-| 6 | 메모리 회수 | Hazard Pointer / Epoch 설계 | 5-7일 |
-| 7 | 패키지화 | API 정리, 문서화, 최적화 | 2-3일 |
+| 5 | Spinlock | 경량 동기화 프리미티브 | 1-2일 |
+| 6 | ABA 문제 | ABA 문제 이해 및 Tagged Pointer 해결 | 2-3일 |
+| 7 | 메모리 풀 | Lock-Free Object Pool 구현 | 3-5일 |
+| 8 | **Job System** | 멀티코어 병렬 처리 프레임워크 | 5-7일 |
 
 ---
 
