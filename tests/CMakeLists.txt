@@ -20,5 +20,13 @@ add_lockfree_test(test_spinlock)
 add_lockfree_test(test_aba_problem)
 add_lockfree_test(test_aba_safe_stack)
 add_lockfree_test(test_memory_pool)
-add_lockfree_test(test_job_system)
+
+# job_system은 cpp 파일이 있으므로 별도 처리
+add_executable(test_job_system test_job_system.cpp ${CMAKE_SOURCE_DIR}/src/job_system.cpp)
+target_link_libraries(test_job_system PRIVATE
+    lockfree
+    GTest::gtest
+    GTest::gtest_main
+)
+add_test(NAME test_job_system COMMAND test_job_system)
 # add_lockfree_test(test_aba_detection)

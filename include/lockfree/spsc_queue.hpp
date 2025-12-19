@@ -39,7 +39,6 @@ public:
         return true;
     }
     
-    // TODO: Implement push (move)
     bool push(T&& value) {
         size_t head = head_.load(std::memory_order_relaxed);
         if (head - tail_.load(std::memory_order_acquire) >= capacity()) {
@@ -50,7 +49,6 @@ public:
         return true;
     }
     
-    // TODO: Implement pop
     bool pop(T& value) {
         size_t tail = tail_.load(std::memory_order_relaxed);
         if (head_.load(std::memory_order_acquire) == tail) {
@@ -61,19 +59,16 @@ public:
         return true;
     }
     
-    // TODO: Implement empty
     [[nodiscard]] bool empty() const noexcept {
         return head_.load(std::memory_order_acquire) == 
                tail_.load(std::memory_order_acquire);
     }
     
-    // TODO: Implement full
     [[nodiscard]] bool full() const noexcept {
         return head_.load(std::memory_order_acquire) - 
                tail_.load(std::memory_order_acquire) >= capacity();
     }
     
-    // TODO: Implement size (optional)
     [[nodiscard]] size_t size() const noexcept {
         return head_.load(std::memory_order_acquire) - 
                tail_.load(std::memory_order_acquire);

@@ -76,10 +76,6 @@ struct Counter;
  * TODO: 직접 구현해보세요!
  */
 struct Job {
-    // ========================================
-    // TODO: 멤버 변수 정의
-    // ========================================
-    
     /**
      * 실행할 함수
      * 
@@ -115,16 +111,8 @@ struct Job {
      */
     std::atomic<std::int32_t> unfinished_jobs{1};
     
-    // ========================================
-    // TODO: 기본 생성자
-    // ========================================
-    
     Job() = default;
-    
-    // ========================================
-    // TODO: 함수와 카운터를 받는 생성자
-    // ========================================
-    
+
     template <typename F>
     explicit Job(F&& func, Counter* cnt = nullptr, Job* par = nullptr)
         : function(std::forward<F>(func))
@@ -155,7 +143,6 @@ struct Job {
  * │  // 모든 Job 완료!                                           │
  * └─────────────────────────────────────────────────────────────┘
  * 
- * TODO: 직접 구현해보세요!
  */
 struct Counter {
     /**
@@ -165,16 +152,9 @@ struct Counter {
      * 0: 모든 Job 완료
      */
     std::atomic<std::int32_t> value{0};
-    
-    // ========================================
-    // TODO: 생성자
-    // ========================================
+
     
     explicit Counter(std::int32_t initial = 0) : value(initial) {}
-    
-    // ========================================
-    // TODO: 증가 (Job 시작 시)
-    // ========================================
     
     /**
      * 카운터 증가
@@ -183,7 +163,6 @@ struct Counter {
      * Memory Order: relaxed로 충분할까? acquire/release가 필요할까?
      */
     void increment() {
-        // TODO: 구현
         value.fetch_add(1, std::memory_order_relaxed);
     }
     
@@ -198,7 +177,6 @@ struct Counter {
      * 반환값: 감소 후 0이 되었는지?
      */
     bool decrement() {
-        // TODO: 구현
         std::int32_t prev = value.fetch_sub(1, std::memory_order_acq_rel);
         return prev == 1;  // 0이 되었음
     }
@@ -268,7 +246,7 @@ private:
      * 우리가 만든 Lock-Free 큐 사용!
      * 모든 워커가 여기서 Job을 가져감
      */
-    MPMCQueue<Job*> job_queue_;
+    MPMCQueue<Job*, DEFAULT_QUEUE_SIZE> job_queue_;
     
     /**
      * Job 메모리 풀
@@ -504,13 +482,6 @@ private:
 
 template <typename F>
 void JobSystem::schedule(F&& func, Counter* counter) {
-    // TODO: 구현해보세요!
-    
-    // 힌트:
-    // 1. job_pool_.construct(...)로 Job 할당
-    // 2. counter가 있으면 counter->increment()
-    // 3. schedule(Job* job) 호출
-    
     Job* job = job_pool_.construct(std::forward<F>(func), counter);
     if (job) {
         if (counter) {
